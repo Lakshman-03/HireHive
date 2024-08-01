@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Dashboard - <%= professional.ownername %></title>
+    <link rel="stylesheet" href="/styles/professional.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        
+
+
+        <%- include('partials/sidenav.ejs') %>
+        <div class="Right-container">
+            <div class="nav-search">
+                <div class="search"><img src="/images/search.svg" alt=""> <input type="text"></div>
+                <div style="width: 100%;"></div>
+                <a title="email" href="mailto:kayalalakshman01@gmail.com?subject=Welcome%20to%20HireHive&body=Welcome%20to%20HireHive">
+                    <div class="profile-pic"><img src="/images/mail.svg" alt=""></div>
+                </a>
+                <div title="profile" class="profile-pic"><img src="/images/profile.svg" alt=""></div>
+            </div>
+            <div class="details">
+                <div>
+                    <h4>Professional Name: <%= professional.ownername %></h4>
+                    <h4>Service Name: <%= professional.service %></h4>
+                    <h4>Ratings: <%= professional.rating %></h4>
+                    <h4>Address: <%= professional.location %></h4>
+                    <h4>Price: ₹ <%= professional.price %>/hr</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

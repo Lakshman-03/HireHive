@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/professional.css">
+    <title>Requests - LocalPro</title>
+</head>
+<body>
+    <div class="main-container">
+        <%- include('partials/sidenav.ejs') %>
+        <div class="Right-container" style="display: flex; align-items: center; flex-direction: column; " >
+           <center><h1>Requests</h1></center>
+            <table id="requestsTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Date</th>
+                        <th onclick="sortTable(1)">Customer Name</th>
+                        <th onclick="sortTable(2)">Service Requested</th>
+                        <th onclick="sortTable(3)">City</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2023-06-15</td>
+                        <td>Naruto</td>
+                        <td>Plumbing</td>
+                        <td>New York</td>
+                        <td><button class="action-btn">...</button></td>
+                    </tr>
+                    <tr>
+                        <td>2023-06-14</td>
+                        <td>Doraemon</td>
+                        <td>Electrical</td>
+                        <td>Los Angeles</td>
+                        <td><button class="action-btn">...</button></td>
+                    </tr>
+                    <tr>
+                        <td>2023-06-13</td>
+                        <td>Levi Ackerman</td>
+                        <td>Cleaning</td>
+                        <td>Chicago</td>
+                        <td><button class="action-btn">...</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function sortTable(n) {
+            const table = document.getElementById("requestsTable");
+            let rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            switching = true;
+            dir = "asc";
+        
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+        
+                    if (dir === "asc") {
+                        if (n === 2) { 
+                            if (new Date(x.innerHTML) > new Date(y.innerHTML)) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else {
+                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    } else if (dir === "desc") {
+                        if (n === 2) {
+                            if (new Date(x.innerHTML) < new Date(y.innerHTML)) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else {
+                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount === 0 && dir === "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const actionButtons = document.querySelectorAll('.action-btn');
+        
+            actionButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const cardPopup = document.createElement('div');
+                    cardPopup.className = 'card-popup';
+                    cardPopup.innerHTML = `
+                        <button class="accept">Accept</button>
+                        <button class="reject">Reject</button>
+                    `;
+                    document.body.appendChild(cardPopup);
+        
+                    const rect = event.target.getBoundingClientRect();
+                    cardPopup.style.top = `${rect.bottom + window.scrollY}px`;
+                    cardPopup.style.left = `${rect.left + window.scrollX}px`;
+                    cardPopup.style.display = 'block';
+        
+                    document.addEventListener('click', (e) => {
+                        if (!cardPopup.contains(e.target) && e.target !== event.target) {
+                            cardPopup.remove();
+                        }
+                    });
+        
+                    cardPopup.querySelector('.accept').addEventListener('click', () => {
+                        alert('Request Accepted');
+                        cardPopup.remove();
+                    });
+        
+                    cardPopup.querySelector('.reject').addEventListener('click', () => {
+                        alert('Request Rejected');
+                        cardPopup.remove();
+                    });
+                });
+            });
+        });
+        
+    </script>
+</body>
+</html>

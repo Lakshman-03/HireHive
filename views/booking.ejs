@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking - LocalPro</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        
+        select, input[type="date"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #fff;
+            color: #333;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, input[type="date"]:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+        
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        button:active {
+            background-color: #004494;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href=""><img class="aimg" src="https://picsum.photos/50/50" alt=""></a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Login / Signup</a></li>
+                <li><a href="/service-categories">Service Categories</a></li>
+                <li><a href="/booking">Booking</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="booking" class="content-section booking-section">
+            <h2>Booking</h2>
+            <form id="bookingForm">
+                <label for="service">Service:</label>
+                <select id="service" name="service" required>
+                    <option value="home-cleaning">Home Cleaning</option>
+                    <option value="plumbing">Plumbing</option>
+                    <option value="electricians">Electricians</option>
+                    <option value="tutors">Tutors</option>
+                    <option value="fitness-trainers">Fitness Trainers</option>
+                </select>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+                <button type="submit">Book Now</button>
+            </form>
+        </section>
+    </main>
+    <script src="/scripts/script.js"></script>
+</body>
+</html>

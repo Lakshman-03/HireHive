@@ -1,0 +1,46 @@
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+	phone_number varchar(13) not null,
+	image text,
+	location varchar(25)
+);
+
+alter table users 
+drop column phone_number;
+
+CREATE TABLE professionals (
+    p_id SERIAL PRIMARY KEY,
+    ownername VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+	phone_number varchar(13) not null,
+	image text,
+	service varchar(225),
+	location varchar(25),
+	rating integer
+);
+
+alter table professionals 
+drop column phone_number;
+
+alter table professionals 
+add column price;
+
+CREATE TABLE review (
+    review_id SERIAL PRIMARY KEY,
+    review text,
+    rating integer,
+    u_id integer references users(id)
+);
+
+CREATE TABLE request (
+    req_id SERIAL PRIMARY KEY,
+    user_id integer references users(id),
+	p_id integer references professionals(p_id),
+	status VARCHAR(50) NOT NULL DEFAULT 'pending',
+	request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    
+);
